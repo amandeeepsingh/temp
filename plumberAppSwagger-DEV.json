@@ -6,7 +6,7 @@
   },
   "host": "gasinsp-plumber-dev.azurewebsites.net",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/.auth/login/custom": {
