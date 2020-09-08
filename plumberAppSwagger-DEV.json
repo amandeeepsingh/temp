@@ -1,0 +1,1932 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Gas Inspections Plumber API"
+  },
+  "host": "gasinsp-plumber-dev.azurewebsites.net",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/.auth/login/custom": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Provides authentication.",
+        "operationId": "Account_CustomLoginAsync",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "loginInfo",
+            "in": "body",
+            "description": "Authentication login information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/api/account/me": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Return user information of current log in user from prior authenticated token.",
+        "operationId": "Account_GetCurrentUser",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AppUserIdentity"
+            }
+          }
+        }
+      }
+    },
+    "/api/Address": {
+      "get": {
+        "tags": [
+          "Address"
+        ],
+        "summary": "Gets the specified query.",
+        "operationId": "Address_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "query.latLon",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "query.bin",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "query.houseNumber",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "query.streetName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "query.boroughName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "query.zip",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/api/AppVersion": {
+      "get": {
+        "tags": [
+          "AppVersion"
+        ],
+        "summary": "Gets the specified query.",
+        "operationId": "AppVersion_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "appVersion.version",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "appVersion.platform",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/Report/GPS1": {
+      "get": {
+        "tags": [
+          "GPS1"
+        ],
+        "summary": "Gets the specified query.",
+        "operationId": "GPS1_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/tables/Attribute": {
+      "get": {
+        "tags": [
+          "Attribute"
+        ],
+        "summary": "Get data for only signed in Attribute based on the IPrincipal user.Identity.Name. \r\nEx:  GET tables/Attribute",
+        "operationId": "Get Attribute",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/tables/Attribute/{id}": {
+      "get": {
+        "tags": [
+          "Attribute"
+        ],
+        "summary": "Get one Attribute based on the id provided.\r\nEx: GET tables/Attribute/BTK000",
+        "operationId": "Get Attribute by Id",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Guid parameter uniquely identifying Attribute record.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/tables/AttributeValues": {
+      "get": {
+        "tags": [
+          "AttributeValues"
+        ],
+        "summary": "Get data for only signed in AttributeValues based on the IPrincipal user.Identity.Name. \r\nEx:  GET tables/AttributeValues",
+        "operationId": "Get AttributeValues",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/tables/AttributeValues/{id}": {
+      "get": {
+        "tags": [
+          "AttributeValues"
+        ],
+        "summary": "Get one AttributeValues based on the id provided.\r\nEx: GET tables/AttributeValues/BTK000",
+        "operationId": "Get AttributeValues by Id",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Guid parameter uniquely identifying AttributeValues record.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/tables/Borough": {
+      "get": {
+        "tags": [
+          "Borough"
+        ],
+        "operationId": "Get Borough",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/tables/Borough/{id}": {
+      "get": {
+        "tags": [
+          "Borough"
+        ],
+        "operationId": "Get Borough by Id",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/tables/ClientErrorLog": {
+      "get": {
+        "tags": [
+          "ClientErrorLog"
+        ],
+        "operationId": "Get ClientErrorLog",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      },
+      "post": {
+        "tags": [
+          "ClientErrorLog"
+        ],
+        "operationId": "Post Error",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "item",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClientErrorLog"
+            }
+          },
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/tables/ClientErrorLog/{id}": {
+      "get": {
+        "tags": [
+          "ClientErrorLog"
+        ],
+        "operationId": "Get ClientErrorLog by Id",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/tables/Device": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "",
+        "operationId": "Get Device",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      },
+      "post": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "",
+        "operationId": "Post Device",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "item",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/tables/Device/{id}": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "operationId": "Get Device by Id",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "",
+        "operationId": "Patch Device Item",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "patch",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/api/FileUpload": {
+      "post": {
+        "tags": [
+          "FileUpload"
+        ],
+        "summary": "",
+        "operationId": "FileUpload",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "fileRequest",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/tables/Job": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "summary": "Get data for only signed in Job based on the IPrincipal user.Identity.Name. \r\nEx:  GET tables/Job",
+        "operationId": "Get Job",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      },
+      "post": {
+        "tags": [
+          "Job"
+        ],
+        "summary": "Post Job item to the Azure database.\r\nEx: POST tables/Job",
+        "operationId": "Post Job Item",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "item",
+            "in": "body",
+            "description": "Job item",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/tables/Job/{id}": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "summary": "Get one Job based on the id provided.\r\nEx: GET tables/Job/BTK000",
+        "operationId": "Get Job by Id",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Guid parameter uniquely identifying Job record.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Job"
+        ],
+        "summary": "Patch Job by id.  Only values provided will be updated.\r\nEx: PATCH tables/Job/1D13EC01-A2AB-419A-94F4-508E11E147CF",
+        "operationId": "Patch Job Item",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Guid of the Job item",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "patch",
+            "in": "body",
+            "description": "Job item",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/api/NotificationInstallations": {
+      "put": {
+        "tags": [
+          "NotificationInstallations"
+        ],
+        "operationId": "NotificationInstallations_PutInstallation",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "installationId",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "notificationInstallation",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NotificationInstallation"
+            }
+          },
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NotificationInstallations"
+        ],
+        "operationId": "NotificationInstallations_DeleteInstallation",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "installationId",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/api/OutgoingResponseRelay/ReprocessByJobIds": {
+      "get": {
+        "tags": [
+          "OutgoingResponseRelay"
+        ],
+        "summary": "Returns Output Data based on the activity Ids provided, bypassing Relay and Biztalk.",
+        "operationId": "Reprocess Data by Job Id",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "riceId",
+            "in": "query",
+            "description": "GasInsp_I_001",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobIdsJson",
+            "in": "query",
+            "description": "Json string list of Job Ids. Ex: [\"251d3018269147a7a7b11e47266af76b\",\"73b446d43c5442a09976d42855dcfc36\",\"50236d5bc93b498bafe8d534c03fda7e\"]",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/api/PlumberVerification": {
+      "get": {
+        "tags": [
+          "PlumberVerification"
+        ],
+        "summary": "",
+        "operationId": "PlumberVerification_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lastName",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/tables/ReadingLog": {
+      "get": {
+        "tags": [
+          "ReadingLog"
+        ],
+        "operationId": "Get Reading Log",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      },
+      "post": {
+        "tags": [
+          "ReadingLog"
+        ],
+        "operationId": "Post Reading Log Item",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "item",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReadingLog"
+            }
+          },
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/tables/ReadingLog/{id}": {
+      "get": {
+        "tags": [
+          "ReadingLog"
+        ],
+        "operationId": "Get Reading Log by Id",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ZUMO-API-VERSION",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "2.0.0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "LoginInfo": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string"
+        },
+        "itsId": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      }
+    },
+    "AppUserIdentity": {
+      "type": "object",
+      "properties": {
+        "UserId": {
+          "type": "string"
+        },
+        "VendorCd": {
+          "type": "string"
+        },
+        "Email": {
+          "type": "string"
+        },
+        "FirstName": {
+          "type": "string"
+        },
+        "LastName": {
+          "type": "string"
+        },
+        "IdentityProviderId": {
+          "type": "string"
+        },
+        "ITSId": {
+          "type": "string"
+        }
+      }
+    },
+    "AddressQuery": {
+      "type": "object",
+      "properties": {
+        "LatLon": {
+          "type": "string"
+        },
+        "Bin": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "HouseNumber": {
+          "type": "string"
+        },
+        "StreetName": {
+          "type": "string"
+        },
+        "BoroughName": {
+          "type": "string"
+        },
+        "Zip": {
+          "type": "string"
+        }
+      }
+    },
+    "AppVersion": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        }
+      }
+    },
+    "Attribute": {
+      "required": [
+        "KeyName",
+        "Label"
+      ],
+      "type": "object",
+      "properties": {
+        "AttributeValuesId": {
+          "type": "string"
+        },
+        "KeyName": {
+          "maxLength": 250,
+          "minLength": 0,
+          "type": "string"
+        },
+        "Label": {
+          "type": "string"
+        },
+        "Id": {
+          "type": "string"
+        },
+        "Version": {
+          "format": "byte",
+          "type": "string"
+        },
+        "CreatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "UpdatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "Deleted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SingleResult[Attribute]": {
+      "type": "object",
+      "properties": {
+        "Queryable": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "AttributeValues": {
+      "required": [
+        "LookupName",
+        "ValueSet"
+      ],
+      "type": "object",
+      "properties": {
+        "LookupName": {
+          "maxLength": 300,
+          "minLength": 0,
+          "type": "string"
+        },
+        "ValueSet": {
+          "type": "string"
+        },
+        "Id": {
+          "type": "string"
+        },
+        "Version": {
+          "format": "byte",
+          "type": "string"
+        },
+        "CreatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "UpdatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "Deleted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SingleResult[AttributeValues]": {
+      "type": "object",
+      "properties": {
+        "Queryable": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttributeValues"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Borough": {
+      "type": "object",
+      "properties": {
+        "BoroughCd": {
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string"
+        },
+        "BoroughName": {
+          "maxLength": 200,
+          "minLength": 0,
+          "type": "string"
+        },
+        "Id": {
+          "type": "string"
+        },
+        "Version": {
+          "format": "byte",
+          "type": "string"
+        },
+        "CreatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "UpdatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "Deleted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SingleResult[Borough]": {
+      "type": "object",
+      "properties": {
+        "Queryable": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Borough"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ClientErrorLog": {
+      "type": "object",
+      "properties": {
+        "Message": {
+          "type": "string"
+        },
+        "Id": {
+          "type": "string"
+        },
+        "Version": {
+          "format": "byte",
+          "type": "string"
+        },
+        "CreatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "UpdatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "Deleted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SingleResult[ClientErrorLog]": {
+      "type": "object",
+      "properties": {
+        "Queryable": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientErrorLog"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Device": {
+      "required": [
+        "SerialNumber",
+        "CalibrationDueDate",
+        "DisplayName",
+        "LastReadSessionLogDate",
+        "LastReadTimedLogDate"
+      ],
+      "type": "object",
+      "properties": {
+        "SerialNumber": {
+          "maxLength": 128,
+          "minLength": 0,
+          "type": "string"
+        },
+        "CalibrationDueDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "DisplayName": {
+          "type": "string"
+        },
+        "LastReadSessionLogDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "LastReadTimedLogDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "UserId": {
+          "maxLength": 128,
+          "minLength": 0,
+          "type": "string"
+        },
+        "Id": {
+          "type": "string"
+        },
+        "Version": {
+          "format": "byte",
+          "type": "string"
+        },
+        "CreatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "UpdatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "Deleted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SingleResult[Device]": {
+      "type": "object",
+      "properties": {
+        "Queryable": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Device"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Job": {
+      "required": [
+        "StartedDate",
+        "CompleteUserId",
+        "VendorCd",
+        "JobData",
+        "JobStartedGeoLocation",
+        "JobCompletededGeoLocation",
+        "FileMetadata"
+      ],
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "CompleteDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "StartedDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "CompleteUpdatedAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "CompleteUserId": {
+          "maxLength": 128,
+          "minLength": 0,
+          "type": "string"
+        },
+        "VendorCd": {
+          "maxLength": 200,
+          "minLength": 0,
+          "type": "string"
+        },
+        "JobData": {
+          "type": "string"
+        },
+        "JobStartedGeoLocation": {
+          "type": "string"
+        },
+        "JobCompletededGeoLocation": {
+          "type": "string"
+        },
+        "FileMetadata": {
+          "type": "string"
+        },
+        "JobAddress": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobAddress"
+          }
+        },
+        "Id": {
+          "type": "string"
+        },
+        "Version": {
+          "format": "byte",
+          "type": "string"
+        },
+        "CreatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "UpdatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "Deleted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "JobAddress": {
+      "required": [
+        "JobId",
+        "BoroughId",
+        "AddrHouseNbr",
+        "AddrStreetName",
+        "AddrZip",
+        "AddrLot",
+        "AddrBlock",
+        "AddrCommunityBoard",
+        "DOBValidated"
+      ],
+      "type": "object",
+      "properties": {
+        "JobId": {
+          "type": "string"
+        },
+        "BoroughId": {
+          "type": "string"
+        },
+        "Latitude": {
+          "format": "double",
+          "type": "number"
+        },
+        "Longitude": {
+          "format": "double",
+          "type": "number"
+        },
+        "AddrHouseNbr": {
+          "maxLength": 200,
+          "minLength": 0,
+          "type": "string"
+        },
+        "AddrCompassPointCd": {
+          "maxLength": 10,
+          "minLength": 0,
+          "type": "string"
+        },
+        "AddrStreetName": {
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "AddrArteryCd": {
+          "maxLength": 20,
+          "minLength": 0,
+          "type": "string"
+        },
+        "AddrZip": {
+          "maxLength": 20,
+          "minLength": 0,
+          "type": "string"
+        },
+        "AddrLot": {
+          "maxLength": 20,
+          "minLength": 0,
+          "type": "string"
+        },
+        "AddrBlock": {
+          "maxLength": 20,
+          "minLength": 0,
+          "type": "string"
+        },
+        "AddrCommunityBoard": {
+          "maxLength": 20,
+          "minLength": 0,
+          "type": "string"
+        },
+        "MuniCd": {
+          "maxLength": 2,
+          "minLength": 0,
+          "type": "string"
+        },
+        "BuildingIdentificationNbr": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "DOBValidated": {
+          "type": "boolean"
+        },
+        "Id": {
+          "type": "string"
+        },
+        "Version": {
+          "format": "byte",
+          "type": "string"
+        },
+        "CreatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "UpdatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "Deleted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SingleResult[Job]": {
+      "type": "object",
+      "properties": {
+        "Queryable": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Job"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "NotificationInstallation": {
+      "required": [
+        "PushChannel",
+        "Platform"
+      ],
+      "type": "object",
+      "properties": {
+        "PushChannel": {
+          "type": "string"
+        },
+        "Platform": {
+          "type": "string"
+        },
+        "InstallationId": {
+          "type": "string"
+        },
+        "Templates": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/NotificationTemplate"
+          }
+        },
+        "SecondaryTiles": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/NotificationSecondaryTile"
+          }
+        },
+        "Tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NotificationTemplate": {
+      "type": "object",
+      "properties": {
+        "Body": {
+          "type": "string"
+        },
+        "Headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "Tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NotificationSecondaryTile": {
+      "type": "object",
+      "properties": {
+        "PushChannel": {
+          "type": "string"
+        },
+        "Tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Templates": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/NotificationTemplate"
+          }
+        }
+      }
+    },
+    "ReadingLog": {
+      "required": [
+        "Bin",
+        "LogStartTime",
+        "LogEndTime",
+        "CalibrationDueDate",
+        "LatestCalibrationDate"
+      ],
+      "type": "object",
+      "properties": {
+        "LogType": {
+          "enum": [
+            "SwitchOn",
+            "SwitchOff",
+            "Leak1",
+            "Leak2",
+            "Alarm"
+          ],
+          "type": "string"
+        },
+        "Bin": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "LogStartTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "LogEndTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "ReadingValues": {
+          "type": "string"
+        },
+        "RawLogData": {
+          "type": "string"
+        },
+        "UserId": {
+          "maxLength": 128,
+          "minLength": 0,
+          "type": "string"
+        },
+        "SerialNumber": {
+          "type": "string"
+        },
+        "CalibrationDueDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "LatestCalibrationDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Id": {
+          "type": "string"
+        },
+        "Version": {
+          "format": "byte",
+          "type": "string"
+        },
+        "CreatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "UpdatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "Deleted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SingleResult[ReadingLog]": {
+      "type": "object",
+      "properties": {
+        "Queryable": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReadingLog"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  }
+}
